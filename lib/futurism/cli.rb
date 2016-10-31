@@ -21,25 +21,22 @@ class Futurism::CLI
       input = gets.strip.downcase
 
       news = Futurism::News.scrape_titles
-      summaries = Futurism::News.scrape_summaries
       urls = Futurism::News.scrape_urls
 
       if input.to_i > 0
-        news = news[input.to_i-1]
-        summary = summaries[input.to_i-1]
+        news_title = news[input.to_i-1]
         url = urls[input.to_i-1]
 
-        puts news
-        puts
-        puts "Summary: #{summary}"
+        puts news_title
         puts "Would you like to read more?"
-        answer = gets.strip
 
+        answer = gets.strip
         if ["Y", "YES"].include?(answer.upcase)
-          input
           content = Futurism::News.scrape_content(url)
+
           puts content
         end
+
       elsif input == "list"
         list_news
       else
