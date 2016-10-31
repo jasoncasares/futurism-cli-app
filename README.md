@@ -1,8 +1,7 @@
 # Futurism
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/futurism`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the Futurism CLI Data Gem!
+This gem scrapes the website futurism.com(a website on future technolgies) into a CLI
 
 ## Installation
 
@@ -22,7 +21,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Input number to read news.
+When prompted "would you like to read more?" type "yes" to read news.
+When finished type "list" to read more news or "exit".
 
 ## Development
 
@@ -38,4 +39,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

@@ -40,7 +40,7 @@ class Futurism::CLI
       elsif input == "list"
         list_news
       else
-        puts "Not sure what you want, type list or exit"
+        puts "Not sure what you want? type list or exit."
       end
     end
   end
