@@ -22,7 +22,6 @@ class Futurism::CLI
 
       if input.to_i > 0
         the_news = @news[input.to_i-1]
-        puts "#{the_news.name}"
         puts "#{the_news.url}"
       elsif input == "list"
         list_news
