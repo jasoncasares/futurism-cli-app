@@ -7,10 +7,10 @@ class Futurism::CLI
   end
 
   def list_news
-    puts "Latest News"
-    @news = Futurism::News.today
-    @news.each.with_index(1) do |news, i|
-      puts "#{i}. #{news.name}"
+    puts "Welcome to Futurism"
+    news = Futurism::News.scrape_titles
+    news.each.with_index(1) do |news, i|
+      puts "#{i}. #{news}"
     end
   end
 
@@ -20,9 +20,26 @@ class Futurism::CLI
       puts "Enter the number for the article you'd like to read or type list to see the latest news again or type exit."
       input = gets.strip.downcase
 
+      news = Futurism::News.scrape_titles
+      summaries = Futurism::News.scrape_summaries
+      urls = Futurism::News.scrape_urls
+
       if input.to_i > 0
-        the_news = @news[input.to_i-1]
-        puts "#{the_news.url}"
+        news = news[input.to_i-1]
+        summary = summaries[input.to_i-1]
+        url = urls[input.to_i-1]
+
+        puts news
+        puts
+        puts "Summary: #{summary}"
+        puts "Would you like to read more?"
+        answer = gets.strip
+
+        if ["Y", "YES"].include?(answer.upcase)
+          input
+          content = Futurism::News.scrape_content(url)
+          puts content
+        end
       elsif input == "list"
         list_news
       else

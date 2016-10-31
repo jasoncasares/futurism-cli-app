@@ -1,5 +1,5 @@
 class Futurism::News
-  attr_accessor :name, :url
+  attr_accessor :name, :summary, :href, :content
 
   def self.today
       self.scrape_news
@@ -11,16 +11,37 @@ class Futurism::News
     news
   end
 
-  def self.scrape_futurism
-    doc = Nokogiri::HTML(open("http://futurism.com/"))
-    #Create articles
-    doc.search("h3.featured-story-title")[2..-1].each do |article|
-      # instantiates article
-      news = self.new
-      news.name = doc.search("h3.featured-story-title").first.text.strip
-      news.url = doc.search("a.main-link ").first.attr("href")
-      news
-      #binding.pry
+  def self.scrape_titles
+    @doc = Nokogiri::HTML(open("http://futurism.com/"))
+
+    name = []
+    @doc.search("h3.featured-story-title").each do |h3|
+      name << h3.text.strip
     end
+    name
   end
+
+  def self.scrape_summaries
+    @doc = Nokogiri::HTML(open("http://futurism.com/"))
+    summaries = @doc.search("a.main-link").attribute("href")
+    #summaries.split("Read More")
+  end
+
+  def self.scrape_urls
+    @doc = Nokogiri::HTML(open("http://futurism.com/"))
+
+    hrefs = []
+    @doc.search("a.main-link a").each do |a|
+      hrefs << a.attr("href")
+    end
+    hrefs
+  end
+
+  def self.scrape_content(url)
+    raise url.inspect
+    @doc = Nokogiri::HTML(open(url))
+    content = @doc.search("div.summary module").text.strip
+  end
+
+
 end
