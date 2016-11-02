@@ -37,7 +37,10 @@ class Futurism::CLI
         end
       end
       puts "Would you like to exit or list again?"
-      input  = gets.strip
+        input  = gets.strip
+        if input == "list"
+          list_news
+        end
     end
   end
 
