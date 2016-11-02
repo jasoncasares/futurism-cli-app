@@ -17,7 +17,7 @@ class Futurism::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "Enter the number for the article you'd like to read or type list to see the latest news again or type exit."
+      puts "Enter the number for the article or type list to see news again or type exit."
       input = gets.strip.downcase
 
       news = Futurism::News.scrape_titles
@@ -33,15 +33,11 @@ class Futurism::CLI
         answer = gets.strip
         if ["Y", "YES"].include?(answer.upcase)
           content = Futurism::News.scrape_content(url)
-
           puts content
         end
-
-      elsif input == "list"
-        list_news
-      else
-        puts "Not sure what you want? type list or exit."
       end
+      puts "Would you like to exit or list again?"
+      input  = gets.strip
     end
   end
 
